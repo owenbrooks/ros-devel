@@ -20,10 +20,11 @@ RUN apt-get -y install libcanberra-gtk-module
 # Intel GPU
 RUN apt-get -y install libgl1-mesa-glx libgl1-mesa-dri mesa-utils
 
-# Nvidia GPU
-LABEL com.nvidia.volumes.needed="nvidia_driver"
-ENV PATH /usr/local/nvidia/bin:${PATH}
-ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
+# Nvidia GPU (nvidia-container-runtime)
+ENV NVIDIA_VISIBLE_DEVICES \
+    ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES \
+    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
 # Set the locale to utf8
 ENV LANG C.UTF-8

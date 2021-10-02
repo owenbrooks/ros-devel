@@ -22,6 +22,7 @@ case "$1" in
             -v "/dev:/dev:rw" \
             -v "${HOME}:${HOME}:rw" \
             -v "/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+            --runtime=nvidia \
             --net=host \
             --hostname $2 \
             --name ros-devel-$2 \
